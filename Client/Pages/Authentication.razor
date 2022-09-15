@@ -1,0 +1,32 @@
+﻿@page "/authentication/{action}"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Microsoft.Extensions.Configuration
+@using System.Threading
+@inject NavigationManager NavigationManager
+@inject IConfiguration Configuration
+
+<div class="w-12/12 md:w-6/12 mx-auto p-6 font-semibold">
+    <RemoteAuthenticatorView Action="@Action">
+        <LoggingIn>
+            <p>Checking login state, please wait…</p>
+        </LoggingIn>
+        <LogOut>
+            @{
+                var authority = Configuration["Auth0:Authority"];
+                var clientId = Configuration["Auth0:ClientId"];
+
+                NavigationManager.NavigateTo($"{authority}/v2/logout?client_id={clientId}&returnTo={NavigationManager.BaseUri}");
+            }
+        </LogOut>
+        <LogInFailed>
+            <p>Eeek, something went wrong trying to log in. Would you mind <a href="authentication/login">trying again?</a> Thanks!</p>
+        </LogInFailed>
+    </RemoteAuthenticatorView>
+</div>
+
+@code{
+
+    [Parameter]
+    public string Action { get; set; }
+
+}
