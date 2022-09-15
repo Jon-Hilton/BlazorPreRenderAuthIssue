@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @inject NavigationManager Navigation;
 
-@*<AuthorizeView>
+<AuthorizeView>
     <Authorized>
         <a href="#" @onclick="BeginSignOut">Log out</a>
     </Authorized>
@@ -12,11 +12,7 @@
     <Authorizing>
         Just Checking…
     </Authorizing>
-</AuthorizeView>*@
-
-<a href="#" @onclick="BeginSignIn">Log In</a>
-
-<a href="#" @onclick="BeginSignOut">Log out</a>
+</AuthorizeView>
 
 @code {
 
